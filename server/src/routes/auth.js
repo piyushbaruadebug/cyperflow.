@@ -1,7 +1,6 @@
 import { randomBytes } from 'node:crypto'
 import bcrypt from 'bcryptjs'
 import { Router } from 'express'
-import nodemailer from 'nodemailer'
 import { signToken, requireAuth } from '../auth.js'
 import { db, newId } from '../db.js'
 import { authenticatedLimits, authLimits } from '../rateLimit.js'
@@ -17,36 +16,25 @@ const getFrontendBaseUrl = () => (process.env.FRONTEND_URL || 'http://localhost:
 const buildResetUrl = (token) => `${getFrontendBaseUrl()}/login?reset=${encodeURIComponent(token)}`
 
 const sendResetEmail = async ({ to, resetUrl }) => {
-  const smtpHost = process.env.SMTP_HOST
-  const smtpPort = Number(process.env.SMTP_PORT || 587)
-  const smtpUser = process.env.SMTP_USER
-  const smtpPass = process.env.SMTP_PASS
-  const smtpFrom = process.env.SMTP_FROM || smtpUser
+  const apiKey = process.env.RESEND_API_KEY
+  const from = process.env.RESEND_FROM
 
-  if (!smtpHost || !smtpUser || !smtpPass) {
-    throw new Error(
-      'SMTP is not configured. Check SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and SMTP_FROM in .env'
-    )
+  if (!apiKey || !from) {
+    throw new Error('Resend is not configured. Set RESEND_API_KEY and RESEND_FROM in server environment variables.')
   }
 
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpPort === 465,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'cyperflow-api/1.0',
     },
-  })
-
-  // Verify SMTP connection before sending
-  await transporter.verify()
-
-  await transporter.sendMail({
-    from: smtpFrom,
-    to,
-    subject: 'Reset your Pennywise AI password',
-    html: `
+    body: JSON.stringify({
+      from,
+      to: [to],
+      subject: 'Reset your Pennywise AI password',
+      html: `
       <div style="font-family: Arial, sans-serif;">
         <h2>Pennywise AI Password Reset</h2>
         <p>You requested to reset your Pennywise AI password.</p>
@@ -59,7 +47,13 @@ const sendResetEmail = async ({ to, resetUrl }) => {
         <p>If you did not request this, you can safely ignore this email.</p>
       </div>
     `,
+    }),
+    signal: AbortSignal.timeout(10_000),
   })
+
+  if (!response.ok) {
+    throw new Error(`Resend email request failed with status ${response.status}`)
+  }
 }
 
 authRouter.post('/signup', ...authLimits('signup', {
