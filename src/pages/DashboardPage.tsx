@@ -10,7 +10,7 @@ import { useApp } from '../store/appContext'
 import { CATEGORIES, type Category } from '../types'
 
 export function DashboardPage() {
-  const { user, expenses } = useApp()
+  const { expenses } = useApp()
   const [category, setCategory] = useState<Category | 'All'>('All')
   const [data, setData] = useState<DashboardResponse | null>(null)
   const [error, setError] = useState('')
