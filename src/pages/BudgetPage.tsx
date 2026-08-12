@@ -36,8 +36,8 @@ export function BudgetPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Monthly Budget Targets</h1>
-        <p className="mt-1 text-sm text-slate-400">Configure target limits per category and track remaining balances.</p>
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Monthly Budget Targets</h1>
+        <p className="mt-1 text-sm text-slate-500">Configure target limits per category and track remaining balances.</p>
       </header>
 
       {error && <p className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-sm text-rose-400">{error}</p>}

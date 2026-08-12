@@ -31,9 +31,9 @@ export function HistoryPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Transaction History</h1>
-          <p className="mt-1 text-sm text-slate-400">
-            {rows.length} transactions · <span className="font-bold text-accent-cyan">{formatMoney(totalOf(rows), true)}</span> total spent
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Transaction History</h1>
+          <p className="mt-1 text-sm text-slate-500">
+            {rows.length} transactions · <span className="font-bold text-blue-600">{formatMoney(totalOf(rows), true)}</span> total spent
           </p>
         </div>
       </header>

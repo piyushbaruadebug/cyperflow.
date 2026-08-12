@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         dark: {
@@ -27,6 +27,15 @@ export default {
           cyan: '#06b6d4',
           indigo: '#6366f1',
           emerald: '#10b981',
+        },
+        apex: {
+          canvas: '#F1F1F5',
+          ink: '#080809',
+          muted: '#A3AAB7',
+          navy: '#051269',
+          blue: '#0B25C4',
+          green: '#13A750',
+          amber: '#F99A03',
         },
       },
     },

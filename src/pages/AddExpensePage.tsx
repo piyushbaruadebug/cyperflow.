@@ -56,8 +56,8 @@ export function AddExpensePage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-100">Add New Expense</h1>
-        <p className="mt-1 text-sm text-slate-400">{expenses.length} transactions recorded in your database.</p>
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Add New Expense</h1>
+        <p className="mt-1 text-sm text-slate-500">{expenses.length} transactions recorded in your database.</p>
       </header>
 
       <form onSubmit={handleSubmit} className="card max-w-2xl space-y-6 border border-slate-800/90 bg-dark-900/90 shadow-2xl backdrop-blur-xl">

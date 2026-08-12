@@ -1,84 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useApp } from '../store/appContext'
 
-const NAV = [
-  {
-    to: '/dashboard',
-    label: 'Dashboard',
-    icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-        />
-      </svg>
-    ),
-  },
-  {
-    to: '/add',
-    label: 'Add Expense',
-    icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    to: '/history',
-    label: 'Expense History',
-    icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-        />
-      </svg>
-    ),
-  },
-  {
-    to: '/budget',
-    label: 'Budget',
-    icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
-        />
-      </svg>
-    ),
-  },
-  {
-    to: '/chat',
-    label: 'AI Chatbot',
-    badge: 'Groq',
-    icon: (
-      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-        />
-      </svg>
-    ),
-  },
+const NAV_LINKS = [
+  { to: '/dashboard', label: 'Dashboard' },
+  { to: '/add', label: 'Add Expense' },
+  { to: '/history', label: 'Expense History' },
+  { to: '/budget', label: 'Budget' },
+  { to: '/chat', label: 'Financial Assistant' },
 ]
 
 export function Layout() {
@@ -91,87 +19,166 @@ export function Layout() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-950 text-slate-100 lg:flex">
-      {/* Sidebar */}
-      <aside className="border-b border-slate-800/80 bg-gradient-to-b from-slate-950 via-dark-900 to-slate-950 backdrop-blur-xl lg:min-h-screen lg:w-64 lg:border-b-0 lg:border-r">
-        <div className="flex items-center justify-between border-b border-blue-500/10 px-6 py-6">
-          <div>
-            <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-300 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_16px_rgba(59,130,246,0.28)]">
-              Pennywise AI
-            </span>
+    <div className="min-h-screen bg-[#fafafa] text-slate-900 font-sans flex flex-col justify-between">
+      {/* Clideo-Style Top Navigation Header */}
+      <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 sm:px-8">
+          {/* Logo */}
+          <div className="flex items-center gap-8">
+            <NavLink to="/dashboard" className="flex items-center gap-2.5 group">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20 transition-transform group-hover:scale-105">
+                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <span className="text-2xl font-black tracking-tight text-slate-900">
+                pennywise
+              </span>
+            </NavLink>
+
+            {/* Navigation Bar Links */}
+            <nav className="hidden md:flex items-center gap-1">
+              {NAV_LINKS.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors ${
+                      isActive
+                        ? 'bg-slate-100 text-blue-600'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+
+          {/* Right Header Action Controls */}
+          <div className="flex items-center gap-3">
+            <NavLink
+              to="/add"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 active:scale-95 transition-all"
+            >
+              <span>+ Add Expense</span>
+            </NavLink>
+
+            <div className="h-5 w-[1px] bg-slate-200 hidden sm:block" />
+
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
+              </div>
+              <span className="hidden lg:inline text-xs font-semibold text-slate-700 capitalize">{user?.name}</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            >
+              Log out
+            </button>
           </div>
         </div>
 
-        {/* Navigation items with smooth hover effects */}
-        <nav className="flex gap-1.5 overflow-x-auto px-4 pb-4 lg:flex-col lg:overflow-visible">
-          {NAV.map((item) => (
+        {/* Mobile Navigation bar */}
+        <nav className="flex md:hidden overflow-x-auto border-t border-slate-100 px-4 py-2 gap-1 bg-white">
+          {NAV_LINKS.map((link) => (
             <NavLink
-              key={item.to}
-              to={item.to}
+              key={link.to}
+              to={link.to}
               className={({ isActive }) =>
-                `group flex items-center gap-3 whitespace-nowrap rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-gradient-to-r from-brand-600/90 to-blue-600/90 text-white shadow-lg shadow-blue-500/20 ring-1 ring-blue-400/30'
-                    : 'text-slate-400 hover:bg-dark-800/80 hover:text-white hover:translate-x-1'
+                `whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                  isActive ? 'bg-blue-50 text-blue-600' : 'text-slate-600'
                 }`
               }
             >
-              {({ isActive }) => (
-                <>
-                  <span
-                    className={`transition-colors duration-200 ${
-                      isActive ? 'text-white' : 'text-slate-400 group-hover:text-accent-cyan'
-                    }`}
-                  >
-                    {item.icon}
-                  </span>
-                  <span className="flex-1">{item.label}</span>
-                  {item.badge && (
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                        isActive
-                          ? 'bg-white/20 text-white'
-                          : 'bg-indigo-500/20 text-indigo-300 group-hover:bg-indigo-500/30'
-                      }`}
-                    >
-                      {item.badge}
-                    </span>
-                  )}
-                </>
-              )}
+              {link.label}
             </NavLink>
           ))}
         </nav>
-      </aside>
+      </header>
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col">
-        {/* Header bar */}
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-slate-800/80 bg-dark-900/80 px-6 py-4 backdrop-blur-xl">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/20 text-sm font-bold text-accent-cyan ring-1 ring-accent-cyan/30">
-              {user?.name?.charAt(0).toUpperCase() || 'U'}
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-8">
+        <Outlet />
+      </main>
+
+      {/* Clideo-Style Multi-Column Footer */}
+      <footer className="border-t border-slate-200 bg-white pt-12 pb-8">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-5 pb-12 border-b border-slate-100">
+            <div>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900">Expense Tracking</h3>
+              <ul className="space-y-2.5 text-xs text-slate-500">
+                <li><NavLink to="/add" className="hover:text-slate-900">Add transaction</NavLink></li>
+                <li><NavLink to="/history" className="hover:text-slate-900">Category breakdown</NavLink></li>
+                <li><NavLink to="/history" className="hover:text-slate-900">Search & filter</NavLink></li>
+                <li><NavLink to="/history" className="hover:text-slate-900">Monthly history</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">CSV Export</NavLink></li>
+              </ul>
             </div>
             <div>
-              <p className="text-xs text-slate-400">Welcome back,</p>
-              <p className="text-sm font-semibold capitalize text-slate-100">{user?.name}</p>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900">Budgeting Tools</h3>
+              <ul className="space-y-2.5 text-xs text-slate-500">
+                <li><NavLink to="/budget" className="hover:text-slate-900">Monthly limits</NavLink></li>
+                <li><NavLink to="/budget" className="hover:text-slate-900">Category budget</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Savings target</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Budget alerts</NavLink></li>
+                <li><NavLink to="/budget" className="hover:text-slate-900">Auto recalculate</NavLink></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900">Financial Insights</h3>
+              <ul className="space-y-2.5 text-xs text-slate-500">
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Spending charts</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Trend comparison</NavLink></li>
+                <li><NavLink to="/chat" className="hover:text-slate-900">Financial assistant</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Average transaction</NavLink></li>
+                <li><NavLink to="/dashboard" className="hover:text-slate-900">Monthly reports</NavLink></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900">Account & Security</h3>
+              <ul className="space-y-2.5 text-xs text-slate-500">
+                <li><NavLink to="/login" className="hover:text-slate-900">Account profile</NavLink></li>
+                <li><NavLink to="/login" className="hover:text-slate-900">Reset password</NavLink></li>
+                <li><NavLink to="/login" className="hover:text-slate-900">JWT Authentication</NavLink></li>
+                <li><NavLink to="/login" className="hover:text-slate-900">Data privacy</NavLink></li>
+                <li><NavLink to="/login" className="hover:text-slate-900">Encrypted password</NavLink></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900">Resources</h3>
+              <ul className="space-y-2.5 text-xs text-slate-500">
+                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-900">Documentation</a></li>
+                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-900">API Guide</a></li>
+                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-900">Help Center</a></li>
+                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-900">Community</a></li>
+                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-900">MIT License</a></li>
+              </ul>
             </div>
           </div>
 
-          <button type="button" className="btn-ghost text-xs" onClick={handleLogout}>
-            Log out
-          </button>
-        </header>
-
-        {/* Dynamic page outlet */}
-        <main className="mx-auto w-full max-w-7xl flex-1 p-6 lg:p-8">
-          <Outlet />
-        </main>
-
-        <footer className="border-t border-slate-800/80 bg-dark-900/80 px-6 py-3 text-center text-xs text-slate-500">
-          <span>© 2026 Pennywise AI. Licensed under MIT.</span>
-        </footer>
-      </div>
+          <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row text-xs text-slate-500">
+            <p>© 2019 – 2026 Pennywise Ltd. All rights reserved</p>
+            <div className="flex flex-wrap items-center gap-6">
+              <span className="hover:text-slate-900 cursor-pointer">Terms</span>
+              <span className="hover:text-slate-900 cursor-pointer">Privacy</span>
+              <span className="hover:text-slate-900 cursor-pointer">Cookies</span>
+              <span className="hover:text-slate-900 cursor-pointer">Refund</span>
+              <span className="hover:text-slate-900 cursor-pointer">Help</span>
+              <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 px-2 py-1 text-[11px] font-medium text-slate-700">
+                🌐 English ▾
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
+

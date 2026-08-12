@@ -1,37 +1,48 @@
+import { ReactNode } from 'react'
+
 interface StatCardProps {
   label: string
   value: string
   hint?: string
   trend?: number
+  icon?: ReactNode
 }
 
-export function StatCard({ label, value, hint, trend }: StatCardProps) {
-  const isPositive = trend !== undefined && trend >= 0
+export function StatCard({ label, value, hint, trend, icon }: StatCardProps) {
+  const isIncrease = trend !== undefined && trend >= 0
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-slate-800/90 bg-dark-900/80 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-dark-850 hover:shadow-2xl hover:shadow-blue-500/10">
-      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-blue-500/5 blur-2xl transition-all duration-300 group-hover:bg-blue-500/15" />
-      
-      <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">{label}</p>
-      <p className="mt-3 text-3xl font-extrabold text-slate-100 tracking-tight">{value}</p>
+    <div className="flex flex-col justify-between bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-blue-200">
+      <div>
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+          {icon && (
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
+              {icon}
+            </div>
+          )}
+        </div>
+        <p className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
+      </div>
 
       {(hint || trend !== undefined) && (
         <div className="mt-3 flex items-center gap-2 text-xs">
           {trend !== undefined && (
             <span
-              className={`inline-flex items-center rounded-full px-2 py-0.5 font-bold ${
-                isPositive
-                  ? 'bg-rose-500/10 text-rose-400 ring-1 ring-rose-500/20'
-                  : 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
+              className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-bold ${
+                isIncrease
+                  ? 'bg-amber-50 text-amber-700 border border-amber-200/60'
+                  : 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
               }`}
             >
-              {isPositive ? '↑ +' : '↓ '}
+              {isIncrease ? '↑ +' : '↓ '}
               {trend.toFixed(1)}%
             </span>
           )}
-          <span className="text-slate-400">{hint}</span>
+          <span className="text-slate-500">{hint}</span>
         </div>
       )}
     </div>
   )
 }
+
