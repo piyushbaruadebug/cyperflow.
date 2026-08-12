@@ -134,14 +134,14 @@ export function LoginPage() {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={() => { setMode('login'); setResetPasswordVisible(false); }}
+              onClick={() => { setMode('login'); setForgotMode(false); }}
               className="rounded-xl px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors"
             >
               Log in
             </button>
             <button
               type="button"
-              onClick={() => { setMode('signup'); setResetPasswordVisible(false); }}
+              onClick={() => { setMode('signup'); setForgotMode(false); }}
               className="rounded-xl bg-blue-600 px-5 py-2 text-xs font-bold text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 transition-all"
             >
               Sign up

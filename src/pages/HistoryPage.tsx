@@ -105,10 +105,10 @@ export function HistoryPage() {
       </div>
 
       {/* History Data Table */}
-      <div className="card-static overflow-hidden p-0 border border-slate-800/90 bg-dark-900/90 shadow-2xl backdrop-blur-xl rounded-2xl">
+      <div className="card-static overflow-hidden p-0 border border-slate-200 bg-white shadow-sm rounded-2xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-slate-800 bg-dark-950/80 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <thead className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
               <tr>
                 <th className="px-6 py-4">Date</th>
                 <th className="px-6 py-4">Description</th>
@@ -118,24 +118,24 @@ export function HistoryPage() {
                 <th className="px-6 py-4 text-center">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-100">
               {rows.map((expense) => (
-                <tr key={expense.id} className="transition-colors duration-150 hover:bg-dark-800/50">
-                  <td className="whitespace-nowrap px-6 py-4 text-slate-400 font-mono text-xs">{formatDate(expense.date)}</td>
-                  <td className="px-6 py-4 font-semibold text-slate-100">{expense.description}</td>
+                <tr key={expense.id} className="transition-colors duration-150 hover:bg-slate-50">
+                  <td className="whitespace-nowrap px-6 py-4 text-slate-500 font-mono text-xs">{formatDate(expense.date)}</td>
+                  <td className="px-6 py-4 font-semibold text-slate-900">{expense.description}</td>
                   <td className="px-6 py-4">
-                    <span className="inline-flex items-center rounded-full bg-dark-950 px-3 py-1 text-xs font-medium text-slate-300 ring-1 ring-slate-800">
+                    <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
                       {expense.category}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-slate-400 text-xs">{expense.method}</td>
-                  <td className="px-6 py-4 text-right font-bold text-slate-100">
+                  <td className="px-6 py-4 text-slate-500 text-xs">{expense.method}</td>
+                  <td className="px-6 py-4 text-right font-bold text-slate-900">
                     {formatMoney(expense.amount, true)}
                   </td>
                   <td className="px-6 py-4 text-center">
                     <button
                       type="button"
-                      className="rounded-lg bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-400 transition-colors hover:bg-rose-500/20 hover:text-rose-300 ring-1 ring-rose-500/20"
+                      className="rounded-lg bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-100"
                       onClick={() => void deleteExpense(expense.id)}
                     >
                       Delete

@@ -61,28 +61,28 @@ export function BudgetPage() {
       </section>
 
       <section className="card">
-        <h2 className="mb-5 text-base font-bold text-slate-100">Category Budget Management</h2>
+        <h2 className="mb-5 text-base font-bold text-slate-900">Category Budget Management</h2>
         <ul className="space-y-6">
           {rows.map((row) => (
-            <li key={row.category} className="rounded-xl border border-slate-800/60 bg-dark-950/40 p-4 transition-all duration-200 hover:border-slate-700/80">
+            <li key={row.category} className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition-all duration-200 hover:border-slate-300">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-base font-semibold text-slate-100">{row.category}</p>
-                  <p className="text-xs text-slate-400">
-                    <span className="font-semibold text-slate-200">{formatMoney(row.spent, true)}</span> of {formatMoney(row.limit)} ·{' '}
+                  <p className="text-base font-semibold text-slate-900">{row.category}</p>
+                  <p className="text-xs text-slate-500">
+                    <span className="font-semibold text-slate-800">{formatMoney(row.spent, true)}</span> of {formatMoney(row.limit)} ·{' '}
                     {row.limit > 0 && row.ratio >= 1 ? (
-                      <span className="font-bold text-rose-400">
+                      <span className="font-bold text-rose-600">
                         {formatMoney(row.spent - row.limit, true)} over limit
                       </span>
                     ) : (
-                      <span className="text-emerald-400">{formatMoney(Math.max(row.limit - row.spent, 0), true)} remaining</span>
+                      <span className="text-emerald-600 font-semibold">{formatMoney(Math.max(row.limit - row.spent, 0), true)} remaining</span>
                     )}
                   </p>
                 </div>
-                <label className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+                <label className="flex items-center gap-2 text-xs font-semibold text-slate-500">
                   Monthly Limit (₹)
                   <input
-                    className="input w-32 py-1.5 text-right font-bold text-slate-100"
+                    className="input w-32 py-1.5 text-right font-bold text-slate-900"
                     type="number"
                     min="0"
                     step="10"
@@ -100,11 +100,11 @@ export function BudgetPage() {
 
       <section className="grid gap-6 lg:grid-cols-2">
         <div className="card">
-          <h2 className="mb-4 text-base font-bold text-slate-100">Category Breakdown</h2>
+          <h2 className="mb-4 text-base font-bold text-slate-900">Category Breakdown</h2>
           <CategoryPie data={spentByCategory} />
         </div>
         <div className="card">
-          <h2 className="mb-4 text-base font-bold text-slate-100">Monthly Spending Trend</h2>
+          <h2 className="mb-4 text-base font-bold text-slate-900">Monthly Spending Trend</h2>
           <MonthlyBar data={monthlyTotals(expenses)} />
         </div>
       </section>

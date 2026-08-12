@@ -60,7 +60,7 @@ export function AddExpensePage() {
         <p className="mt-1 text-sm text-slate-500">{expenses.length} transactions recorded in your database.</p>
       </header>
 
-      <form onSubmit={handleSubmit} className="card max-w-2xl space-y-6 border border-slate-800/90 bg-dark-900/90 shadow-2xl backdrop-blur-xl">
+      <form onSubmit={handleSubmit} className="card max-w-2xl space-y-6">
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label className="label" htmlFor="description">
@@ -81,7 +81,7 @@ export function AddExpensePage() {
             </label>
             <input
               id="amount"
-              className="input text-base font-bold text-slate-100"
+              className="input text-base font-bold text-slate-900"
               type="number"
               min="0"
               step="0.01"

@@ -103,10 +103,10 @@ export function ChatPage() {
           ))}
           {thinking && (
             <div className="flex justify-start">
-              <div className="flex items-center gap-2 rounded-2xl rounded-bl-sm border border-slate-800 bg-dark-850 px-5 py-3 text-sm text-slate-400 shadow-lg">
-                <span className="h-2 w-2 rounded-full bg-accent-cyan animate-bounce" />
-                <span className="h-2 w-2 rounded-full bg-accent-cyan animate-bounce [animation-delay:0.2s]" />
-                <span className="h-2 w-2 rounded-full bg-accent-cyan animate-bounce [animation-delay:0.4s]" />
+              <div className="flex items-center gap-2 rounded-2xl rounded-bl-sm border border-slate-200 bg-white px-5 py-3 text-sm text-slate-500 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-blue-500 animate-bounce" />
+                <span className="h-2 w-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.2s]" />
+                <span className="h-2 w-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.4s]" />
                 <span className="ml-1 text-xs">Analyzing financial database…</span>
               </div>
             </div>
@@ -115,15 +115,15 @@ export function ChatPage() {
         </div>
 
         {/* Input & Suggested Prompts Box */}
-        <div className="border-t border-slate-800/80 bg-dark-950/70 p-5">
-          {error && <p className="mb-3 text-sm text-rose-400 bg-rose-500/10 p-2.5 rounded-xl border border-rose-500/20">{error}</p>}
+        <div className="border-t border-slate-200 bg-white p-5">
+          {error && <p className="mb-3 text-sm text-rose-600 bg-rose-50 p-2.5 rounded-xl border border-rose-200">{error}</p>}
 
           <div className="mb-3.5 flex flex-wrap gap-2">
             {SUGGESTED_PROMPTS.map((prompt) => (
               <button
                 key={prompt}
                 type="button"
-                className="rounded-full border border-slate-800 bg-dark-900/90 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition-all duration-200 hover:border-brand-500/50 hover:bg-dark-800 hover:text-white hover:shadow-md hover:shadow-blue-500/10 hover:-translate-y-0.5"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-xs font-medium text-slate-700 transition-all duration-200 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 hover:-translate-y-0.5"
                 onClick={() => void send(prompt)}
               >
                 💡 {prompt}
