@@ -12,23 +12,7 @@ The API applies in-memory fixed-window rate limits. Authentication endpoints hav
 
 ## Run it
 
-Two terminals, from the project root:
-
-```bash
-# 1. API (http://localhost:4000)
-cd server
-npm install
-cp .env.example .env      # set a strong JWT_SECRET before starting the API
-# Optional: set DEMO_EMAIL and DEMO_PASSWORD in server/.env, then run:
-npm run seed              # creates the configured local demo account with 6 months of data
-npm run dev
-
-# 2. Frontend (http://localhost:5173)
-npm install
-npm run dev
-```
-
-Vite proxies `/api` to `http://localhost:4000`, so the frontend needs no extra config. Sign up for a fresh account, or log in with a demo account you configured locally.
+https://cyperflow.vercel.app/dashboard
 
 ## Pages
 
