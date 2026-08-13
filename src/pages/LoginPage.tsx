@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Wallet } from 'lucide-react'
 import { api } from '../lib/api'
 import { useApp } from '../store/appContext'
 
@@ -115,11 +116,8 @@ export function LoginPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white shadow-lg shadow-blue-500/25">
-                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m4 8 8-4 8 4-8 4-8-4Z" fill="currentColor" stroke="none" />
-                  <path d="m4 12 8 4 8-4M4 16l8 4 8-4" />
-                </svg>
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white">
+                <Wallet className="h-6 w-6" />
               </div>
               <span className="text-2xl font-black tracking-tight text-slate-900">
                 Pennywise
