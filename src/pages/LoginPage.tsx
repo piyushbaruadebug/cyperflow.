@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { api } from '../lib/api'
 import { useApp } from '../store/appContext'
 
@@ -115,20 +115,20 @@ export function LoginPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20">
-                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white shadow-lg shadow-blue-500/25">
+                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m4 8 8-4 8 4-8 4-8-4Z" fill="currentColor" stroke="none" />
+                  <path d="m4 12 8 4 8-4M4 16l8 4 8-4" />
                 </svg>
               </div>
               <span className="text-2xl font-black tracking-tight text-slate-900">
-                pennywise
+                Pennywise
               </span>
             </div>
             <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-              <span className="cursor-pointer hover:text-slate-900">Overview</span>
-              <span className="cursor-pointer hover:text-slate-900">Features ▾</span>
-              <span className="cursor-pointer hover:text-slate-900">Security</span>
-              <span className="cursor-pointer hover:text-slate-900">Pricing</span>
+              <Link to="/overview" className="hover:text-slate-900">Overview</Link>
+              <Link to="/features" className="hover:text-slate-900">Features</Link>
+              <Link to="/security" className="hover:text-slate-900">Security</Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
@@ -457,11 +457,13 @@ export function LoginPage() {
           <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row text-xs text-slate-500">
             <p>© 2019 – 2026 Pennywise Ltd. All rights reserved</p>
             <div className="flex flex-wrap items-center gap-6">
-              <span className="hover:text-slate-900 cursor-pointer">Terms</span>
-              <span className="hover:text-slate-900 cursor-pointer">Privacy</span>
-              <span className="hover:text-slate-900 cursor-pointer">Cookies</span>
-              <span className="hover:text-slate-900 cursor-pointer">Refund</span>
-              <span className="hover:text-slate-900 cursor-pointer">Help</span>
+              <Link to="/overview" className="hover:text-slate-900">Overview</Link>
+              <Link to="/features" className="hover:text-slate-900">Features</Link>
+              <Link to="/security" className="hover:text-slate-900">Security</Link>
+              <Link to="/terms" className="hover:text-slate-900">Terms</Link>
+              <Link to="/privacy" className="hover:text-slate-900">Privacy</Link>
+              <Link to="/cookies" className="hover:text-slate-900">Cookies</Link>
+              <Link to="/help" className="hover:text-slate-900">Help</Link>
               <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 px-2 py-1 text-[11px] font-medium text-slate-700">
                 🌐 English ▾
               </span>
@@ -472,4 +474,3 @@ export function LoginPage() {
     </div>
   )
 }
-
