@@ -1,14 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LogOut, Menu, Wallet, X } from "lucide-react";
+import { Bot, LogOut, Menu, Wallet, X } from "lucide-react";
 import { useState } from "react";
 import { useApp } from "../store/appContext";
 
 const NAV_LINKS = [
-  { label: "Overview", to: "/overview" },
-  { label: "Features", to: "/features" },
-  { label: "Security", to: "/security" },
-  { label: "Documentation", to: "/documentation" },
-  { label: "Community", to: "/community" },
+  { label: "Dashboard", to: "/dashboard" },
+  { label: "Add Expense", to: "/add" },
+  { label: "History", to: "/history" },
+  { label: "Budget", to: "/budget" },
+  { label: "Pennywise AI", to: "/chat" },
 ];
 
 export function SiteNav() {
@@ -25,14 +25,14 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8">
-        <NavLink to="/" className="inline-flex items-center gap-3">
+        <NavLink to="/dashboard" className="inline-flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
             <Wallet className="h-5 w-5" />
           </span>
           <span className="font-display text-xl font-bold">Pennywise</span>
         </NavLink>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 lg:gap-7 md:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.to}
@@ -61,10 +61,11 @@ export function SiteNav() {
             Log out
           </button>
           <NavLink
-            to="/help"
+            to="/chat"
             className="inline-flex items-center justify-center rounded-full bg-accent px-4 py-2 text-sm font-bold text-accent-foreground transition-transform hover:scale-[1.03]"
           >
-            Get Help
+            <Bot className="mr-1.5 h-4 w-4" />
+            AI Agent
           </NavLink>
         </div>
 
@@ -109,11 +110,12 @@ export function SiteNav() {
                 Log out {user?.name ? `(${user.name})` : ""}
               </button>
               <NavLink
-                to="/help"
+                to="/chat"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center justify-center rounded-full bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground"
               >
-                Get Help
+                <Bot className="mr-1.5 h-4 w-4" />
+                Open Pennywise AI
               </NavLink>
             </div>
           </nav>

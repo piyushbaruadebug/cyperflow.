@@ -7,12 +7,13 @@ import { CATEGORIES, type Category, type PaymentMethod } from '../types'
 const METHODS: PaymentMethod[] = ['Card', 'Cash', 'UPI', 'Bank Transfer']
 
 export function AddExpensePage() {
-  const { addExpense, expenses } = useApp()
+  const { addExpense, expenses, setBudget } = useApp()
   const navigate = useNavigate()
 
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState('')
   const [category, setCategory] = useState<Category>('Food')
+  const [budgetLimit, setBudgetLimit] = useState('')
   const [method, setMethod] = useState<PaymentMethod>('Card')
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [error, setError] = useState('')
@@ -31,6 +32,11 @@ export function AddExpensePage() {
       setError('Amount must be greater than zero.')
       return
     }
+    const limit = budgetLimit === '' ? null : Number(budgetLimit)
+    if (limit !== null && (!Number.isFinite(limit) || limit < 0)) {
+      setError('Budget limit must be zero or more.')
+      return
+    }
 
     setError('')
     setBusy(true)
@@ -42,7 +48,10 @@ export function AddExpensePage() {
         method,
         date,
       })
-      setSaved(`${description.trim()} · ${formatMoney(value, true)}`)
+      if (limit !== null) {
+        await setBudget(category, Math.round(limit * 100) / 100)
+      }
+      setSaved(`${description.trim()} · ${formatMoney(value, true)}${limit !== null ? ` · ${category} budget saved` : ''}`)
       setDescription('')
       setAmount('')
     } catch (cause) {
@@ -104,7 +113,7 @@ export function AddExpensePage() {
             />
           </div>
 
-          <div>
+          <div className="space-y-5">
             <label className="label" htmlFor="category">
               Category
             </label>
@@ -120,6 +129,21 @@ export function AddExpensePage() {
                 </option>
               ))}
             </select>
+            <div>
+              <label className="label" htmlFor="budget-limit">
+                Monthly Budget Limit (₹)
+              </label>
+              <input
+                id="budget-limit"
+                className="input"
+                type="number"
+                min="0"
+                step="10"
+                placeholder="Optional"
+                value={budgetLimit}
+                onChange={(event) => setBudgetLimit(event.target.value)}
+              />
+            </div>
           </div>
 
           <div>

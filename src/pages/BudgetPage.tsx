@@ -10,6 +10,9 @@ import { CATEGORIES, type Category } from '../types'
 export function BudgetPage() {
   const { expenses, budgets, setBudget } = useApp()
   const [error, setError] = useState('')
+  const [draftLimits, setDraftLimits] = useState<Record<Category, string>>({} as Record<Category, string>)
+  const [savingCategory, setSavingCategory] = useState<Category | null>(null)
+  const [savedCategory, setSavedCategory] = useState<Category | null>(null)
 
   const monthExpenses = useMemo(() => expensesInMonth(expenses), [expenses])
   const spentByCategory = useMemo(() => totalsByCategory(monthExpenses), [monthExpenses])
@@ -27,9 +30,15 @@ export function BudgetPage() {
   const save = async (category: Category, limit: number) => {
     try {
       setError('')
+      setSavedCategory(null)
+      setSavingCategory(category)
       await setBudget(category, limit)
+      setDraftLimits((previous) => ({ ...previous, [category]: String(limit) }))
+      setSavedCategory(category)
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Could not save budget')
+    } finally {
+      setSavingCategory(null)
     }
   }
 
@@ -79,19 +88,30 @@ export function BudgetPage() {
                     )}
                   </p>
                 </div>
-                <label className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                  Monthly Limit (₹)
+                <div className="flex flex-wrap items-end justify-end gap-2">
+                  <label className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+                    Monthly Limit (₹)
                   <input
                     className="input w-32 py-1.5 text-right font-bold text-slate-900"
                     type="number"
                     min="0"
                     step="10"
-                    defaultValue={row.limit}
+                    value={draftLimits[row.category] ?? String(row.limit)}
                     aria-label={`${row.category} budget limit`}
-                    onBlur={(event) => save(row.category, Math.max(0, Number(event.target.value) || 0))}
+                    onChange={(event) => setDraftLimits((previous) => ({ ...previous, [row.category]: event.target.value }))}
                   />
-                </label>
+                  </label>
+                  <button
+                    type="button"
+                    className="btn-primary px-3 py-1.5 text-xs"
+                    disabled={savingCategory === row.category}
+                    onClick={() => save(row.category, Math.max(0, Number(draftLimits[row.category] ?? row.limit) || 0))}
+                  >
+                    {savingCategory === row.category ? 'Saving…' : 'Save'}
+                  </button>
+                </div>
               </div>
+              {savedCategory === row.category && <p className="mb-3 text-xs font-semibold text-emerald-600">Budget limit saved.</p>}
               <ProgressBar ratio={row.ratio} />
             </li>
           ))}
