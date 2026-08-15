@@ -453,7 +453,7 @@ export function LoginPage() {
           </div>
 
           <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row text-xs text-slate-500">
-            <p>© 2019 – 2026 Pennywise Ltd. All rights reserved</p>
+            <p>© 2026 Pennywise Ltd. All rights reserved</p>
             <div className="flex flex-wrap items-center gap-6">
               <Link to="/overview" className="hover:text-slate-900">Overview</Link>
               <Link to="/features" className="hover:text-slate-900">Features</Link>

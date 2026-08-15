@@ -124,7 +124,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-5 border-t border-ink-border pt-7 text-sm text-ink-muted sm:flex-row">
-          <p>© 2019 – 2026 Pennywise Ltd. All rights reserved</p>
+          <p>© 2026 Pennywise Ltd. All rights reserved</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             {LEGAL.map((link) => (
               <FooterItem key={link.label} link={link} />

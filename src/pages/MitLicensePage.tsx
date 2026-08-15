@@ -31,7 +31,7 @@ export function MitLicensePage() {
           </h2>
 
           <p className="mt-6 leading-8 text-slate-600">
-            Copyright © 2019–2026 Pennywise Ltd.
+            Copyright © 2026 Pennywise Ltd.
           </p>
 
           <p className="mt-6 leading-8 text-slate-600">
